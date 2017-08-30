@@ -1,3 +1,4 @@
+<?php require_once('../Manager/CategoryManager.php'); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -11,7 +12,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        echo 'test';
+        $ca = new Manager\CategoryManager();
+        $ca->getAllCategory();
         ?>
     </body>
 </html>
