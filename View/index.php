@@ -13,7 +13,8 @@ and open the template in the editor.
     <body>
         <?php
         $ca = new Manager\CategoryManager();
-        $ca->getAllCategory();
+        $ca->queryCategory();
+        var_dump($ca->getResponse())
         ?>
     </body>
 </html>

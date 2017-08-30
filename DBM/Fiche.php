@@ -22,7 +22,7 @@ class Fiche
     /*
      * @var Integer $parent_id
      */
-    private $category_id;
+    private $categoryId;
 
     function getId()
     {
@@ -34,7 +34,7 @@ class Fiche
         return $this->libelle;
     }
 
-    function getCategory_id()
+    function getCategoryId()
     {
         return $this->category_id;
     }
@@ -49,9 +49,19 @@ class Fiche
         $this->libelle = $libelle;
     }
 
-    function setCategory_id($category_id)
+    function setCategoryId($category_id)
     {
         $this->category_id = $category_id;
+    }
+
+    public function getValues()
+    {
+        return $this->getLibelle() . "," . $this->getCategoryId();
+    }
+
+    public function setValues()
+    {
+        return "libelle=" . $this->getLibelle() . "," . "category_id=" . $this->getCategoryId();
     }
 
 }

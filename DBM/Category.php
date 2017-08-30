@@ -69,4 +69,14 @@ class Category
         $this->description = $description;
     }
 
+    public function getValues()
+    {
+        return $this->getParentId() . "," . $this->getLibelle() . "," . $this->getDescription();
+    }
+
+    public function setValues()
+    {
+        return "parent_id=" . $this->getParentId() . "," . "libelle=" . $this->getLibelle() . "," . "description=" . $this->getDescription();
+    }
+
 }
