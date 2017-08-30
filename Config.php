@@ -1,22 +1,28 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Nom de la base de données
  */
+define($BD_NAME, 'annuaire_test');
 
-/**
- * Description of Config
- *
- * @author josio
+/*
+ * Port du Mysql
  */
-class Config
-{
-    public $BD_NAME = '';
-    public $BD_PORT = '';
-    public $BD_HOST = '';
-    public $BD_USER = '';
-    public $BD_PASSWD = '';
+define($BD_PORT, '3306');
 
-}
+/*
+ * host de la bse de données
+ */
+define($BD_HOST, 'localhost');
+
+/*
+ * Utilisateur de la base de données
+ */
+define($BD_USER, 'root');
+
+/*
+ * Mot de passe de la base de données
+ */
+define($BD_PASSWD, '');
+
+
