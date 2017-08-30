@@ -79,4 +79,9 @@ class Category
         return "parent_id=" . $this->getParentId() . "," . "libelle=" . $this->getLibelle() . "," . "description=" . $this->getDescription();
     }
 
+    public function getName()
+    {
+        return "category";
+    }
+
 }

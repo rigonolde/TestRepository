@@ -5,13 +5,6 @@ namespace Manager;
 require_once('../Manager/DB.php');
 require_once('../DBM/category.php');
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of CategoryManager
  *
@@ -78,7 +71,7 @@ class CategoryManager
 
     public function insert($entity)
     {
-        $sql = sprintf("INSERT INTO categonry (parent_id, libelle, description) VALUES (%s)", $entity->getValues());
+        $sql = sprintf("INSERT INTO %s (parent_id, libelle, description) VALUES ( %s )", $entity->getName(), $entity->getValues());
 
         if ($this->statement->query($sql) === TRUE) {
             $this->reponse = array(
@@ -93,12 +86,28 @@ class CategoryManager
 
     public function update($entity)
     {
-        $sql = sprintf("UPDATE category SET %s WHERE id=%d", $entity->setValues(), $entity->getValues());
+        $sql = sprintf("UPDATE %s SET %s WHERE id=%d", $entity->getName(), $entity->setValues(), $entity->getValues());
 
 
         if ($this->statement->query($sql) === TRUE) {
             $this->reponse = array(
                 "info" => "update record successfully"
+            );
+        } else {
+            $this->reponse = array(
+                "error" => $this->statement->error
+            );
+        }
+    }
+
+    public function delete($entity)
+    {
+        $sql = sprintf("DELETE FROM %s  WHERE id=%d", $entity->getName(), $entity->getValues());
+
+
+        if ($this->statement->query($sql) === TRUE) {
+            $this->reponse = array(
+                "info" => "Detete record successfully"
             );
         } else {
             $this->reponse = array(

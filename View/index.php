@@ -12,9 +12,6 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        $ca = new Manager\CategoryManager();
-        $ca->queryCategory();
-        var_dump($ca->getResponse())
         ?>
     </body>
 </html>

@@ -64,4 +64,9 @@ class Fiche
         return "libelle=" . $this->getLibelle() . "," . "category_id=" . $this->getCategoryId();
     }
 
+    public function getName()
+    {
+        return "fiche";
+    }
+
 }
