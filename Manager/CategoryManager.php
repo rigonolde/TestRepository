@@ -3,6 +3,7 @@
 namespace Manager;
 
 require_once('../Manager/DB.php');
+require_once('../DBM/category.php');
 
 
 /*
@@ -24,6 +25,7 @@ class CategoryManager
     public function __construct()
     {
         $this->DB = new \Manager\DB();
+        $response = array();
     }
 
     public function getAllCategory()
@@ -31,7 +33,7 @@ class CategoryManager
         $statemnet = $this->DB->getStatement();
 
         if ($statemnet == null) {
-            return json_decode(array(
+            $this->reponse = json_decode(array(
                 "error" => "error connexion DB"
             ));
         }
@@ -39,11 +41,18 @@ class CategoryManager
         $sql = "SELECT * FROM category";
         $result = $statemnet->query($sql);
         if ($result->num_rows > 0) {
-            //encour dev
+            while ($row = $result->fetch_assoc()) {
+                $this->response[] = array(
+                    "id" => $row['id'],
+                    "parentId" => $row['parent_id'],
+                    "libelle" => $row['libelle'],
+                    "description" => $row['description']
+                );
+            }
         } else {
-            return json_decode(array(
+            $this->reponse = array(
                 "info" => "Accune resulta trouvé"
-            ));
+            );
         }
     }
 

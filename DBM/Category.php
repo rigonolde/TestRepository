@@ -17,7 +17,7 @@ class Category
     /*
      * @var Integer $parent_id
      */
-    private $parent_id;
+    private $parentId;
 
     /*
      * @var String $libelle
@@ -34,9 +34,9 @@ class Category
         return $this->id;
     }
 
-    function getParent_id()
+    function getParentId()
     {
-        return $this->parent_id;
+        return $this->parentId;
     }
 
     function getLibelle()
@@ -54,9 +54,9 @@ class Category
         $this->id = $id;
     }
 
-    function setParent_id($parent_id)
+    function setParentId($parentId)
     {
-        $this->parent_id = $parent_id;
+        $this->parentId = $parentId;
     }
 
     function setLibelle($libelle)
