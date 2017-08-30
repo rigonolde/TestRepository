@@ -1,5 +1,7 @@
 <?php
 
+namespace DBM;
+
 /**
  * Table Category
  *
