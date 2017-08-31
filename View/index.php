@@ -1,4 +1,3 @@
-<?php require_once('../Manager/CategoryManager.php'); ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.

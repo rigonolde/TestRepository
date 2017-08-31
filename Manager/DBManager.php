@@ -4,13 +4,14 @@ namespace Manager;
 
 require_once('../Manager/DB.php');
 require_once('../DBM/category.php');
+require_once('../DBM/fiche.php');
 
 /**
  * Description of CategoryManager
  *
  * @author josio
  */
-class CategoryManager
+class DBManager
 {
     private $response;
     private $statement;
