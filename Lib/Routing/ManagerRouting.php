@@ -60,7 +60,7 @@ class ManagerRouting
                     if ($this->compareRoute($arrayPath, $arrayUrl) == true) {
                         $routeParams = $this->getRouteParameters($arrayPath, $arrayUrl);
                         $class = new $controller();
-                        call_user_func(array($class, $action), $routeParams);
+                        call_user_func_array(array($class, $action), $routeParams);
                     }
                 }
             }

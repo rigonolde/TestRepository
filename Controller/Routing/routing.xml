@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
+
+    <!-- route for index  -->
     <route urlPath="/" controller="Controller\IndexController" action="indexAction">
     </route>
+    <!-- route for category -->
     <route urlPath="/category/delete/{id}" controller="Controller\CategoryController" action="deleteAction">
     </route>
     <route urlPath="/category/edit/{id}" controller="Controller\CategoryController" action="editAction" >
     </route>
+    <route urlPath="/category/new" controller="Controller\CategoryController" action="editAction" >
+    </route>
     <route urlPath="/category/list" controller="Controller\CategoryController" action="listAction">
     </route>
+
+    <!-- route for fish -->
+    <route urlPath="/fiche/delete/{id}" controller="Controller\FicheController" action="deleteAction">
+    </route>
+    <route urlPath="/fiche/edit/{id}" controller="Controller\FicheController" action="editAction" >
+    </route>
+    <route urlPath="/fiche/new" controller="Controller\FicheController" action="editAction" >
+    </route>
+    <route urlPath="/fiche/list" controller="Controller\FicheController" action="listAction">
+    </route>
+
 </root>
