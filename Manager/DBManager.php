@@ -3,8 +3,8 @@
 namespace Manager;
 
 require_once('DB.php');
-
-use Manager\DB;
+require_once('DBM/category.php');
+require_once('DBM/Fiche.php');
 
 /**
  * Description of CategoryManager
@@ -117,7 +117,34 @@ class DBManager
         }
     }
 
-    function getResponse()
+    public function convetArrayToCategory($arrayList = array())
+    {
+        $arrayCategory = array();
+        foreach ($arrayList as $value) {
+            $category = new \DBM\Category;
+            $category->setId($value["id"]);
+            $category->setParentId($value["parentId"]);
+            $category->setLibelle($value["libelle"]);
+            $category->setDescription($value["description"]);
+            $arrayCategory[] = $category;
+        }
+        return $arrayCategory;
+    }
+
+    public function convetArrayToFiches($arrayList = array())
+    {
+        $arrayFiche = array();
+        foreach ($arrayList as $value) {
+            $fiche = new \DBM\Fiche();
+            $fiche->setId($value["id"]);
+            $fiche->setLibelle($value["libelle"]);
+            $fiche->setCategoryId($value["categoryId"]);
+            $arrayFiche[] = $fiche;
+        }
+        return $arrayFiche;
+    }
+
+    public function getResponse()
     {
         return $this->response;
     }

@@ -18,9 +18,9 @@ class IndexController extends \Lib\MoteurTemplate\RenderTamplate
     {
         $dbManager = new \Manager\DBManager();
         $dbManager->queryCategory();
-        $reponse = $dbManager->getResponse();
+        $reponse = $dbManager->convetArrayToCategory($dbManager->getResponse());
         $this->renderView('View/index.php', array(
-            "category" => $reponse
+            "categories" => $reponse
         ));
     }
 

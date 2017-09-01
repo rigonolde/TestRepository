@@ -31,13 +31,13 @@ and open the template in the editor.
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($category as $value) {
+                <?php foreach ($categories as $category) {
                     ?>
                     <tr>
-                        <td><?php echo $value["id"] ?></td>
-                        <td><?php echo $value["parentId"] != 0 ?: "--" ?></td>
-                        <td><?php echo $value["libelle"] ?></td>
-                        <td><?php echo $value["description"] ?></td>
+                        <td><?php echo $category->getId(); ?></td>
+                        <td><?php echo $category->getParentId() != 0 ?: "--"; ?></td>
+                        <td><?php echo $category->getLibelle(); ?></td>
+                        <td><?php echo $category->getDescription(); ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
