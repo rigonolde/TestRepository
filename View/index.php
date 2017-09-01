@@ -13,21 +13,10 @@ and open the template in the editor.
         <table>
             <thead>
                 <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        parent id
-                    </th>
-                    <th>
-                        libelle
-                    </th>
-                    <th>
-                        description
-                    </th>
-                    <th>
-
-                    </th>
+                    <th>id</th>
+                    <th>parent id</th>
+                    <th>libelle</th>
+                    <th>description</th>
                 </tr>
             </thead>
             <tbody>
