@@ -10,7 +10,37 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                        parent id
+                    </th>
+                    <th>
+                        libelle
+                    </th>
+                    <th>
+                        description
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($category as $value) {
+                    ?>
+                    <tr>
+                        <td><?php echo $value["id"] ?></td>
+                        <td><?php echo $value["parentId"] != 0 ?: "--" ?></td>
+                        <td><?php echo $value["libelle"] ?></td>
+                        <td><?php echo $value["description"] ?></td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
     </body>
 </html>

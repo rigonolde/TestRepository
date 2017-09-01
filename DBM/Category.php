@@ -84,4 +84,9 @@ class Category
         return "category";
     }
 
+    public function getValuesToInsert()
+    {
+        return "parent_id, libelle, description";
+    }
+
 }

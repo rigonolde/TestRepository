@@ -69,4 +69,9 @@ class Fiche
         return "fiche";
     }
 
+    public function getValuesToInsert()
+    {
+        return "libelle, description, category_id";
+    }
+
 }

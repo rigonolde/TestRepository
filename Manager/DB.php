@@ -2,7 +2,9 @@
 
 namespace Manager;
 
-require_once('../Config/Config.php');
+require_once('Config/Config.php');
+
+use Config\Config;
 
 /**
  * Description of DBConnexion

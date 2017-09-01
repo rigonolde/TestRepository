@@ -2,9 +2,9 @@
 
 namespace Manager;
 
-require_once('../Manager/DB.php');
-require_once('../DBM/category.php');
-require_once('../DBM/fiche.php');
+require_once('DB.php');
+
+use Manager\DB;
 
 /**
  * Description of CategoryManager
@@ -18,7 +18,7 @@ class DBManager
 
     public function __construct()
     {
-        $db = new \Manager\DB();
+        $db = new DB();
         $this->statement = $db->getStatement();
         $this->response = array();
     }
@@ -41,7 +41,7 @@ class DBManager
                 );
             }
         } else {
-            $this->reponse = array(
+            $this->response = array(
                 "info" => "Accune resulta trouvé"
             );
         }
@@ -64,7 +64,7 @@ class DBManager
                 );
             }
         } else {
-            $this->reponse = array(
+            $this->response = array(
                 "info" => "Accune resulta trouvé"
             );
         }
@@ -72,14 +72,14 @@ class DBManager
 
     public function insert($entity)
     {
-        $sql = sprintf("INSERT INTO %s (parent_id, libelle, description) VALUES ( %s )", $entity->getName(), $entity->getValues());
+        $sql = sprintf("INSERT INTO %s (%s) VALUES ( %s )", $entity->getName(), $entity->getValuesToInsert(), $entity->getValues());
 
         if ($this->statement->query($sql) === TRUE) {
-            $this->reponse = array(
+            $this->response = array(
                 "info" => "New record created successfully"
             );
         } else {
-            $this->reponse = array(
+            $response = array(
                 "error" => $this->statement->error
             );
         }
@@ -87,15 +87,15 @@ class DBManager
 
     public function update($entity)
     {
-        $sql = sprintf("UPDATE %s SET %s WHERE id=%d", $entity->getName(), $entity->setValues(), $entity->getValues());
+        $sql = sprintf("UPDATE %s SET %s WHERE id=%d", $entity->getName(), $entity->setValues(), $entity->getId());
 
 
         if ($this->statement->query($sql) === TRUE) {
-            $this->reponse = array(
+            $this->response = array(
                 "info" => "update record successfully"
             );
         } else {
-            $this->reponse = array(
+            $this->response = array(
                 "error" => $this->statement->error
             );
         }
@@ -103,15 +103,15 @@ class DBManager
 
     public function delete($entity)
     {
-        $sql = sprintf("DELETE FROM %s  WHERE id=%d", $entity->getName(), $entity->getValues());
+        $sql = sprintf("DELETE FROM %s  WHERE id=%d", $entity->getName(), $entity->getId());
 
 
         if ($this->statement->query($sql) === TRUE) {
-            $this->reponse = array(
+            $this->response = array(
                 "info" => "Detete record successfully"
             );
         } else {
-            $this->reponse = array(
+            $this->response = array(
                 "error" => $this->statement->error
             );
         }
@@ -120,11 +120,6 @@ class DBManager
     function getResponse()
     {
         return $this->response;
-    }
-
-    function setResponse($response)
-    {
-        $this->response = $response;
     }
 
 }

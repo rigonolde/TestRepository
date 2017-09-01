@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <route urlPath="/" controller="Controller\IndexController" action="indexAction">
+    </route>
+    <route urlPath="/category/delete/{id}" controller="Controller\CategoryController" action="deleteAction">
+    </route>
+    <route urlPath="/category/edit/{id}" controller="Controller\CategoryController" action="editAction" >
+    </route>
+    <route urlPath="/category/list" controller="Controller\CategoryController" action="listAction">
+    </route>
+</root>
