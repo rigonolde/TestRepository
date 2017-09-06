@@ -54,4 +54,15 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
         }
     }
 
+    public function listAction()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $dbManager = new \Manager\DBManager();
+            $dbManager->queryCategory();
+            $this->renderJson($dbManager->getResponse());
+        } else {
+            $this->renderJson(array("error" => "Error Method sending"));
+        }
+    }
+
 }

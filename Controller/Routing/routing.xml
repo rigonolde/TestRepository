@@ -5,13 +5,13 @@
     <route urlPath="/" controller="Controller\IndexController" action="indexAction">
     </route>
     <!-- route for category -->
-    <route urlPath="/category/delete/{id}" controller="Controller\CategoryController" action="deleteAction">
+    <route urlPath="/api/category/delete/{id}" controller="Controller\CategoryController" action="deleteAction">
     </route>
-    <route urlPath="/category/edit/{id}" controller="Controller\CategoryController" action="editAction" >
+    <route urlPath="/api/category/edit/{id}" controller="Controller\CategoryController" action="editAction" >
     </route>
-    <route urlPath="/category/new" controller="Controller\CategoryController" action="editAction" >
+    <route urlPath="/api/category/new" controller="Controller\CategoryController" action="editAction" >
     </route>
-    <route urlPath="/category/list" controller="Controller\CategoryController" action="listAction">
+    <route urlPath="/api/category/list" controller="Controller\CategoryController" action="listAction">
     </route>
 
     <!-- route for fish -->
