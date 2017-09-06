@@ -31,8 +31,8 @@ class RenderTamplate
 
     public function renderJson($data)
     {
-        header('Content-Type: application/json; charset=utf8', true);
-        print_r(json_encode($data, JSON_FORCE_OBJECT));
+        header('Content-Type: application/json; charset=utf8');
+        echo json_encode($data);
     }
 
 }
