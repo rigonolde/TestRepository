@@ -27,7 +27,7 @@ class DBManager
     {
         $where = '';
         if (!empty($param)) {
-            $where = " WHERE " . explode("AND", $param);
+            $where = " WHERE " . implode(" AND ", $param);
         }
         $sql = "SELECT * FROM category" . $where;
         $result = $this->statement->query($sql);

@@ -58,7 +58,9 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $dbManager = new \Manager\DBManager();
-            $dbManager->queryCategory();
+            $param = array();
+            $param[] = "parent_id is null";
+            $dbManager->queryCategory($param);
             $this->renderJson($dbManager->getResponse());
         } else {
             $this->renderJson(array("error" => "Error Method sending"));

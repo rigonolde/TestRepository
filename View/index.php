@@ -43,8 +43,12 @@
                 <section class="row text-center placeholders">
 
                 </section>
-
-                <?php ?>
+                <div id="tableContent" style="display: none;">
+                    <!--                   table content-->
+                </div>
+                <div id="img-loading" class="img-loading">
+                    <img src="../Assets/Images/loading.gif"  height = "200px">
+                </div>
             </main>
         </div>
     </div>

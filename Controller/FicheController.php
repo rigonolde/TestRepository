@@ -52,4 +52,15 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
         }
     }
 
+    public function listAction()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $dbManager = new \Manager\DBManager();
+            $dbManager->queryFiche();
+            $this->renderJson($dbManager->getResponse());
+        } else {
+            $this->renderJson(array("error" => "Error Method sending"));
+        }
+    }
+
 }

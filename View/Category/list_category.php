@@ -9,16 +9,7 @@
                 <th>Description</th>
             </tr>
         </thead>
-        <tbody>
-            <?php foreach ($fiches as $fiche) {
-                ?>
-                <tr>
-                    <td><?php echo $fiche->getId(); ?></td>
-                    <td><?php echo $fiche->getCategoryId() != 0 ?: "--"; ?></td>
-                    <td><?php echo $fiche->getLibelle(); ?></td>
-                    <td><?php echo $fiche->getDescription(); ?></td>
-                </tr>
-            <?php } ?>
+        <tbody id="tableBodyCategory">
         </tbody>
     </table>
 </div>

@@ -8,6 +8,7 @@
         <link href="../Assets/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="../Assets/bootstrap/dashboard.css" rel="stylesheet">
         <link href="../Assets/bootstrap/sticky-footer.css" rel="stylesheet">
+        <link href="../Assets/Css/all.css" rel="stylesheet">
         <!-- JS -->
         <script type="text/javascript">
             var host = "<?php echo $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']; ?>";

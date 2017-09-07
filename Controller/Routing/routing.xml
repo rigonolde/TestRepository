@@ -15,13 +15,13 @@
     </route>
 
     <!-- route for fish -->
-    <route urlPath="/fiche/delete/{id}" controller="Controller\FicheController" action="deleteAction">
+    <route urlPath="/api/fiche/delete/{id}" controller="Controller\FicheController" action="deleteAction">
     </route>
-    <route urlPath="/fiche/edit/{id}" controller="Controller\FicheController" action="editAction" >
+    <route urlPath="/api/fiche/edit/{id}" controller="Controller\FicheController" action="editAction" >
     </route>
-    <route urlPath="/fiche/new" controller="Controller\FicheController" action="editAction" >
+    <route urlPath="/api/fiche/new" controller="Controller\FicheController" action="editAction" >
     </route>
-    <route urlPath="/fiche/list" controller="Controller\FicheController" action="listAction">
+    <route urlPath="/api/fiche/list" controller="Controller\FicheController" action="listAction">
     </route>
 
 </root>
