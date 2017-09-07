@@ -1,5 +1,5 @@
 <footer class="footer">
     <div class="container">
-        <span class="text-muted">Corporight by josio</span>
+        <span class="text-muted">Corporight by eni</span>
     </div>
 </footer>
