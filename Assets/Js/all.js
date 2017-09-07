@@ -31,7 +31,8 @@ function listAllCagory() {
 function viewTbodyCategory(data) {
     var view = "";
     if (data["info"] !== undefined || data["error"] !== undefined) {
-        view += "<h1 style='color : red;'>" + data["info"] + "</h1>";
+        var msg = data["info"] !== undefined ? data["info"] : data["error"];
+        view += "<h1 style='color : red;'>" + msg + "</h1>";
         $("#tableContent").html(view);
     } else {
         for (var i = 0; i < data.length; i++) {
@@ -69,7 +70,8 @@ function listAllFiche() {
 function viewTbodyFiche(data) {
     var view = "";
     if (data["info"] !== undefined || data["error"] !== undefined) {
-        view += "<h1 style='color : red;'>" + data["info"] + "</h1>";
+        var msg = data["info"] !== undefined ? data["info"] : data["error"];
+        view += "<h1 style='color : red;'>" + msg + "</h1>";
         $("#tableContent").html(view);
     } else {
         for (var i = 0; i < data.length; i++) {
