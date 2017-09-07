@@ -1,12 +1,11 @@
-<h2>List des categories</h2>
+<h2>List des Fiches</h2>
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>id</th>
-                <th>Parent</th>
+                <th>category ID</th>
                 <th>Libellé</th>
-                <th>Description</th>
             </tr>
         </thead>
         <tbody id="tableBodyFiche">

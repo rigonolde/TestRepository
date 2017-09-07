@@ -56,7 +56,11 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $dbManager = new \Manager\DBManager();
-            $dbManager->queryFiche();
+            $params = array();
+            if (isset($_GET["ids"])) {
+                $params[] = "id IN " . $_GET["ids"];
+            }
+            $dbManager->queryFiche($params);
             $this->renderJson($dbManager->getResponse());
         } else {
             $this->renderJson(array("error" => "Error Method sending"));

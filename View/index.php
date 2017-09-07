@@ -29,10 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#" id="category">CATEGORIES</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="fiche">FICHES</a>
-                    </li>
                 </ul>
+                <div id="jstree_demo_div">
+                </div>
 
 
             </nav>

@@ -35,8 +35,8 @@ class DBManager
             while ($row = $result->fetch_assoc()) {
                 $this->response[] = array(
                     "id" => $row['id'],
-                    "parentId" => $row['parent_id'],
-                    "libelle" => $row['libelle'],
+                    "parent" => $row['parent_id'] ?: "#",
+                    "text" => $row['libelle'],
                     "description" => $row['description']
                 );
             }
@@ -51,7 +51,7 @@ class DBManager
     {
         $where = '';
         if (!empty($param)) {
-            $where = " WHERE " . explode("AND", $param);
+            $where = " WHERE " . implode(" AND ", $param);
         }
         $sql = "SELECT * FROM fiche" . $where;
         $result = $this->statement->query($sql);
