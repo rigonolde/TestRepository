@@ -53,7 +53,7 @@ class DBManager
         if (!empty($param)) {
             $where = " WHERE " . implode(" AND ", $param);
         }
-        $sql = "SELECT * FROM fiche" . $where;
+        $sql = "SELECT f.id as id,f.libelle as libelle,c.libelle as category_id  FROM fiche as f LEFT JOIN category as c ON c.id = f.category_id" . $where;
         $result = $this->statement->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

@@ -58,7 +58,7 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
             $dbManager = new \Manager\DBManager();
             $params = array();
             if (isset($_GET["ids"])) {
-                $params[] = "id IN " . $_GET["ids"];
+                $params[] = "c.id IN " . $_GET["ids"];
             }
             $dbManager->queryFiche($params);
             $this->renderJson($dbManager->getResponse());
