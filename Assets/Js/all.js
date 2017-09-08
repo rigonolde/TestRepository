@@ -75,7 +75,7 @@ function listAllFiche(url) {
         success: function (response) {
             hideMsg();
             viewTbodyFiche(response);
-            deteleFiche();
+            manageFiche();
         },
         error: function (xhr, ajaxOptions, thrownError) {
             hideMsg();
@@ -98,7 +98,7 @@ function viewTbodyFiche(data) {
             view += "<tr> <td>" + data[i]["id"] +
                     "</td><td>" + data[i]["libelle"] +
                     "</td><td>" + data[i]["categoryId"] +
-                    '</td><td> <button type="button" class="btn btn-primary">Modifier</button></td> \n\
+                    '</td><td> <button type="button" class="btn btn-primary editFiche">Modifier</button></td> \n\
                     <td><button type="button" class="btn btn-danger deleteFiche" id="' + data[i]["id"] +
                     '">Supprimer</button></td></tr>';
         }
@@ -109,12 +109,47 @@ function viewTbodyFiche(data) {
     $("#tableContent").show("slow");
 }
 
-function deteleFiche() {
+function manageFiche() {
 
     $(".deleteFiche").click(function () {
         var url = host + "/api/fiche/delete/" + $(this).attr('id');
         var tr = $(this).parents("tr");
         $("#dialog-confirm").dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+                "Oui": function () {
+                    $.ajax({
+                        url: url,
+                        method: "GET",
+                        cache: false,
+                        dataType: "json",
+                        success: function (response) {
+                            tr.remove();
+                            hideMsg();
+                            $("div#succes").show("slow");
+                            $("div#succes").children("strong").html("Operation avec succées !");
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            hideMsg();
+                            $("div#error").show("slow");
+                            $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+                        }
+                    });
+                    $(this).dialog("close");
+                },
+                "Non": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+    });
+    $(".editFiche").click(function () {
+        var url = host + "/api/fiche/delete/" + $(this).attr('id');
+        var tr = $(this).parents("tr");
+        $("#dialog-edit-fiche").dialog({
             resizable: false,
             height: "auto",
             width: 400,

@@ -63,8 +63,18 @@
         </div>
     </div>
     <?php include 'footer.php'; ?>
-    <div id="dialog-confirm" title="Empty the recycle bin?">
+    <div id="dialog-confirm" title="Confirmation">
         <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Voulez-vous supprimer ?</p>
+    </div>
+    <div style="display: none;">
+        <div id="dialog-edit-fiche" title="Modification Fiche">
+            <input type="hidden" id='idEdit'>
+            <label>Categories</label>&nbsp;&nbsp;&nbsp;
+            <select>
+            </select><br />
+            <label>Libellé</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id='libelleEdit'>
+        </div>
     </div>
 </body>
 </html>
