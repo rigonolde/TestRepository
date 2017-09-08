@@ -40,7 +40,18 @@
                 <h1>Dashboard</h1>
 
                 <section class="row text-center placeholders">
-
+                    <div id="succes" class="alert alert-success alert-dismissible fade show" role="alert" style="width: 90%;margin-left: 20px;height: 55px;display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong></strong>
+                    </div>
+                    <div id="error" class="alert alert-warning alert-dismissible fade show" role="alert" style="width: 90%;margin-left: 20px;height: 55px;display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Operation n'abouti pas </strong>
+                    </div>
                 </section>
                 <div id="tableContent" style="display: none;">
                     <!--                   table content-->
@@ -52,5 +63,8 @@
         </div>
     </div>
     <?php include 'footer.php'; ?>
+    <div id="dialog-confirm" title="Empty the recycle bin?">
+        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Voulez-vous supprimer ?</p>
+    </div>
 </body>
 </html>

@@ -35,14 +35,14 @@ class DBManager
             while ($row = $result->fetch_assoc()) {
                 $this->response[] = array(
                     "id" => $row['id'],
-                    "parent" => $row['parent_id'] ?: "#",
+                    "parent" => $row['parent_id'] ?: 0,
                     "text" => $row['libelle'],
                     "description" => $row['description']
                 );
             }
         } else {
             $this->response = array(
-                "info" => "Accune resulta trouvé"
+                "info" => "Accune resultatt trouvé"
             );
         }
     }
@@ -65,7 +65,7 @@ class DBManager
             }
         } else {
             $this->response = array(
-                "info" => "Accune resulta trouvé"
+                "info" => "Accune resultat trouvé"
             );
         }
     }
