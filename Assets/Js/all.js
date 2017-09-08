@@ -158,11 +158,10 @@ function manageFiche() {
                 "Oui": function () {
                     $.ajax({
                         url: url,
-                        method: "GET",
+                        method: "POST",
                         cache: false,
                         dataType: "json",
                         success: function (response) {
-                            tr.remove();
                             hideMsg();
                             $("div#succes").show("slow");
                             $("div#succes").children("strong").html("Operation avec succées !");
