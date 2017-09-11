@@ -11,15 +11,15 @@
         <link href="../Assets/Css/all.css" rel="stylesheet">
         <link rel="stylesheet" href="../Assets/Tree/dist/themes/default/style.min.css" />
         <link rel="stylesheet" href="../Assets/Js/jquery-ui-1.12.1/jquery-ui.css" />
+        <link rel="stylesheet" href="../Assets/Js/jquery-ui-contextmenu/dist/jquery.contextMenu.css" />
         <!-- JS -->
         <script type="text/javascript">
             var host = "<?php echo $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']; ?>";
         </script>
         <script type="text/javascript" src="../Assets/js/jquery-3.2.1.js"></script>
         <script type="text/javascript" src="../Assets/js/jquery-ui-1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript" src="../Assets/bootstrap/dist/js/bootstrap.js"></script>
-        <script type="text/javascript" src="../Assets/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../Assets/js/all.js"></script>
+        <script type="text/javascript" src="../Assets/Js/jquery-ui-contextmenu/dist/jquery.contextMenu.js"></script>
         <script src="../Assets/Tree/dist/jstree.min.js"></script>
 
     </head>
