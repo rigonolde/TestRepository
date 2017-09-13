@@ -1,5 +1,18 @@
 $(document).ready(function () {
-    listAllFiche(host + "/api/fiche/list/");
+    listAllCagory(host + "/api/category/list/");
+});
+
+function listAllCagory(url) {
+    var tmp = $('#jstree_demo_div').jstree(true);
+    if (tmp) {
+        tmp.destroy();
+    }
+    $.get(url, function (data) {
+        datas = data.concat([{id: "0", parent: "#", text: "Root", description: "lkjklj"}]);
+        $('#jstree_demo_div').jstree({'core': {
+                'data': datas
+            }});
+    });
     $('#jstree_demo_div').on("changed.jstree", function (e, data) {
         var children = data.node.children_d;
         var ids = "";
@@ -12,78 +25,9 @@ $(document).ready(function () {
         listAllFiche(url);
     });
 
-    $.get(host + "/api/category/list/", function (data) {
-        datas = data.concat([{id: "0", parent: "#", text: "Root", description: "lkjklj"}]);
-        console.log(datas);
-        $('#jstree_demo_div').jstree({'core': {
-                'data': datas
-            }});
-    });
-    //Menu contextule
-    $(function () {
-        $.contextMenu({
-            selector: '.jstree-node',
-            callback: function (key, options) {
-                var m = "clicked: " + key;
-                window.console && console.log(m) || alert(m);
-            },
-            items: {
-                "edit": {name: "Edit", icon: "edit"},
-                "cut": {name: "Cut", icon: "cut"},
-                copy: {name: "Copy", icon: "copy"},
-                "paste": {name: "Paste", icon: "paste"},
-                "delete": {name: "Delete", icon: "delete"},
-                "sep1": "---------",
-                "quit": {name: "Quit", icon: function () {
-                        return 'context-menu-icon context-menu-icon-quit';
-                    }}
-            }
-        });
+    listAllFiche(host + "/api/fiche/list/");
+    menuContextuele();
 
-        $('.context-menu-one').on('click', function (e) {
-            console.log('clicked', this);
-        })
-    });
-});
-
-function listAllCagory(url) {
-    $.get("../View/Category/list_category.php", function (data) {
-        $("#tableContent").html(data);
-    });
-    $("#img-loading").show();
-    $.ajax({
-        url: url,
-        method: "GET",
-        cache: false,
-        dataType: "json",
-        success: function (response) {
-            hideMsg();
-            viewTbodyCategory(response);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            console.log(ajaxOptions + xhr + thrownError);
-        }
-    });
-}
-
-function viewTbodyCategory(data) {
-    var view = "";
-    if (data["info"] !== undefined || data["error"] !== undefined) {
-        var msg = data["info"] !== undefined ? data["info"] : data["error"];
-        view += "<h1 style='color : red;'>" + msg + "</h1>";
-        $("#tableContent").html(view);
-    } else {
-        for (var i = 0; i < data.length; i++) {
-            view += "<tr> <td>" + data[i]["id"] +
-                    "</td><td>" + data[i]["parent"] +
-                    "</td><td>" + data[i]["text"] +
-                    "</td><td>" + data[i]["description"] +
-                    "</td></tr>";
-        }
-        $("#tableBodyCategory").html(view);
-    }
-    $("#img-loading").hide();
-    $("#tableContent").show("slow");
 }
 
 function listAllFiche(url) {
@@ -97,14 +41,12 @@ function listAllFiche(url) {
         cache: false,
         dataType: "json",
         success: function (response) {
-            hideMsg();
+            showMsg(response);
             viewTbodyFiche(response);
             manageFiche();
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            hideMsg();
-            $("#img-loading").hide();
-            $("div#error").show("slow");
+            showMsg(xhr);
             $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
         }
     });
@@ -113,8 +55,6 @@ function listAllFiche(url) {
 function viewTbodyFiche(data) {
     var view = "";
     if (data["info"] !== undefined || data["error"] !== undefined) {
-        var msg = data["info"] !== undefined ? data["info"] : data["error"];
-        view += "<h1 style='color : red;'>" + msg + "</h1>";
         $("#tableContent").html(view);
     } else {
         for (var i = 0; i < data.length; i++) {
@@ -152,13 +92,10 @@ function manageFiche() {
                         dataType: "json",
                         success: function (response) {
                             tr.remove();
-                            hideMsg();
-                            $("div#succes").show("slow");
-                            $("div#succes").children("strong").html("Operation avec succées !");
+                            showMsg(response);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            hideMsg();
-                            $("div#error").show("slow");
+                            showMsg(xhr);
                             $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
                         }
                     });
@@ -186,13 +123,10 @@ function manageFiche() {
                         cache: false,
                         dataType: "json",
                         success: function (response) {
-                            hideMsg();
-                            $("div#succes").show("slow");
-                            $("div#succes").children("strong").html("Operation avec succées !");
+                            showMsg(response);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            hideMsg();
-                            $("div#error").show("slow");
+                            showMsg(xhr);
                             $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
                         }
                     });
@@ -205,7 +139,58 @@ function manageFiche() {
         });
     });
 }
-function hideMsg() {
+
+function showMsg(response) {
+    console.log(response);
+    console.log(response["info"]);
     $("div#error").hide("slow");
     $("div#succes").hide("slow");
+    if (response["info"] !== undefined) {
+        $("div#succes").show("slow");
+        $("div#succes").children("strong").html(response["info"]);
+    }
+    if (response["error"] !== undefined) {
+        $("div#error").show("slow");
+        $("div#error").children("strong").html(response["error"]);
+    }
+}
+
+function deleteCategory(url) {
+
+    $.ajax({
+        url: url,
+        method: "GET",
+        cache: false,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            showMsg(response);
+            listAllCagory(host + "/api/category/list/");
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            showMsg(xhr);
+            $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+        }
+    });
+}
+function menuContextuele() {
+    //Menu contextule
+    $(function () {
+        $.contextMenu({
+            selector: '.jstree-node',
+            callback: function (key, options) {
+                var urlDelete = host + "/api/category/delete/" + options.$trigger.attr('id');
+                if (key == "delete") {
+                    deleteCategory(urlDelete)
+                }
+                console.log(options.$trigger.attr('id'));
+            },
+            items: {
+                "edit": {name: "Modifier", icon: "edit"},
+                "delete": {name: "Supprimer", icon: "delete"},
+            }
+        });
+
+
+    });
 }

@@ -40,7 +40,7 @@
                 <h1>Dashboard</h1>
 
                 <section class="row text-center placeholders">
-                    <span class="context-menu-one btn btn-neutral">right click me</span>
+                    <!-- MESSAGE D'EURREUR -->
                     <div id="succes" class="alert alert-success alert-dismissible fade show" role="alert" style="width: 90%;margin-left: 20px;height: 55px;display: none;">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -53,6 +53,7 @@
                         </button>
                         <strong>Operation n'abouti pas </strong>
                     </div>
+                    <!-- FIN MESSAGE D'EURREUR -->
                 </section>
                 <div id="tableContent" style="display: none;">
                     <!--                   table content-->
