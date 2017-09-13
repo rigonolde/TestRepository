@@ -71,12 +71,12 @@ class Category
 
     public function getValues()
     {
-        return $this->getParentId() . "," . $this->getLibelle() . "," . $this->getDescription();
+        return $this->getParentId() . ",'" . $this->getLibelle() . "','" . $this->getDescription() . "'";
     }
 
     public function setValues()
     {
-        return "parent_id=" . $this->getParentId() . "," . "libelle=" . $this->getLibelle() . "," . "description=" . $this->getDescription();
+        return "parent_id=" . $this->getParentId() . "," . "libelle='" . $this->getLibelle() . "'," . "description='" . $this->getDescription() . "'";
     }
 
     public function getName()

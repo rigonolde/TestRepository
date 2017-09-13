@@ -37,11 +37,10 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
         }
     }
 
-    public function addAction($id)
+    public function addAction()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fiche = new \DBM\Category();
-            $fiche->setId($_POST["id"]);
+            $fiche = new \DBM\Fiche();
             $fiche->setLibelle($_POST["libelle"]);
             $fiche->setCategoryId($_POST["categoryId"]);
             $dbManager = new \Manager\DBManager();

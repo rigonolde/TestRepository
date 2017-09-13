@@ -54,6 +54,7 @@
                         <strong>Operation n'abouti pas </strong>
                     </div>
                     <!-- FIN MESSAGE D'EURREUR -->
+                    <button type="button" class="btn btn-primary editFiche" data-value="new">Nouveau Fiche</button>
                 </section>
                 <div id="tableContent" style="display: none;">
                     <!--                   table content-->
@@ -72,10 +73,13 @@
         <div id="dialog-edit-fiche" title="Modification Fiche">
             <input type="hidden" id='idEdit'>
             <label>Categories</label>&nbsp;&nbsp;&nbsp;
-            <select>
+            <select id='selectEditCategory' class="width">
             </select><br />
             <label>Libellé</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" id='libelleEdit'>
+            <input type="text" id='libelleEdit'class="width controlVide"/>
+            <div id="img-loading-edit">
+                <img src="../Assets/Images/loading.gif" style="height: 30px;float: right;display: none;">
+            </div>
         </div>
     </div>
 </body>

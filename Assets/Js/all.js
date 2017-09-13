@@ -1,5 +1,15 @@
 $(document).ready(function () {
     listAllCagory(host + "/api/category/list/");
+    $(".controlVide").keypress(function () {
+        $(this).removeAttr("style");
+        if ($(this).val() == "") {
+            $(this).attr("style", "border-color:red;");
+        }
+    });
+    $("#selectEditCategory").change(function () {
+        $(this).children("option").removeAttr("selected");
+        $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
+    }).change();
 });
 
 function listAllCagory(url) {
@@ -8,6 +18,7 @@ function listAllCagory(url) {
         tmp.destroy();
     }
     $.get(url, function (data) {
+        $("#selectEditCategory").html(selectCategory(data));
         datas = data.concat([{id: "0", parent: "#", text: "Root", description: "lkjklj"}]);
         $('#jstree_demo_div').jstree({'core': {
                 'data': datas
@@ -60,11 +71,10 @@ function viewTbodyFiche(data) {
         for (var i = 0; i < data.length; i++) {
 
             view += "<tr> <td>" + data[i]["id"] +
+                    "</td><td>" + data[i]["category"] +
                     "</td><td>" + data[i]["libelle"] +
-                    "</td><td>" + data[i]["categoryId"] +
-                    '</td><td> <button type="button" class="btn btn-primary editFiche">Modifier</button></td> \n\
-                    <td><button type="button" class="btn btn-danger deleteFiche" id="' + data[i]["id"] +
-                    '">Supprimer</button></td></tr>';
+                    '</td><td> <button type="button" class="btn btn-primary editFiche" data-value="' + data[i]["categoryId"] + '">Modifier</button></td> \n\
+                    <td><button type="button" class="btn btn-danger deleteFiche" id="' + data[i]["id"] + '">Supprimer</button></td></tr>';
         }
         $("#tableBodyFiche").html(view);
     }
@@ -108,8 +118,19 @@ function manageFiche() {
         });
     });
     $(".editFiche").click(function () {
-        var url = host + "/api/fiche/delete/" + $(this).attr('id');
-        var tr = $(this).parents("tr");
+        var action = $(this).attr("data-value");
+        var tr = null;
+        if (action != 'new') {
+            tr = $(this).parents("tr");
+            $("#selectEditCategory").children("option").removeAttr("selected");
+            $("#selectEditCategory").children("option[value='" + $(this).attr("data-value") + "']").attr("selected", "selected")
+            $("#idEdit").val(tr.children("td").eq(0).html());
+            $("#libelleEdit").val(tr.children("td").eq(2).html());
+        }
+        var urlPost = host + "/api/fiche/edit/" + $("#idEdit").val();
+        if (action == "new") {
+            urlPost = host + "/api/fiche/new";
+        }
         $("#dialog-edit-fiche").dialog({
             resizable: false,
             height: "auto",
@@ -117,19 +138,39 @@ function manageFiche() {
             modal: true,
             buttons: {
                 "Oui": function () {
-                    $.ajax({
-                        url: url,
-                        method: "POST",
-                        cache: false,
-                        dataType: "json",
-                        success: function (response) {
-                            showMsg(response);
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            showMsg(xhr);
-                            $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
-                        }
-                    });
+                    if ($("#libelleEdit").val() != '') {
+                        $("#img-loading-edit").show();
+                        $.ajax({
+                            url: urlPost,
+                            method: "POST",
+                            cache: false,
+                            data: {
+                                'libelle': $("#libelleEdit").val(),
+                                'categoryId': $("#selectEditCategory").children("option[selected='selected']").val(),
+                            },
+                            dataType: "json",
+                            success: function (response) {
+
+                                $("#img-loading-edit").hide();
+                                if (action == "new") {
+                                    listAllFiche(host + "/api/fiche/list/");
+                                } else {
+                                    tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
+                                    tr.children("td").eq(2).html($("#libelleEdit").val());
+                                    tr.children("td").eq(3).children('button').attr("data-value", $("#selectEditCategory").children("option[selected='selected']").val());
+                                }
+                                showMsg(response);
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                $("#img-loading-edit").hide();
+                                showMsg(xhr);
+                                $("#img-loading-edit").hide();
+                                $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+                            }
+                        });
+                    } else {
+                        $("#libelleEdit").attr("style", "border-color:red;")
+                    }
                     $(this).dialog("close");
                 },
                 "Non": function () {
@@ -138,11 +179,12 @@ function manageFiche() {
             }
         });
     });
+    $("#newFiche").click(function () {
+
+    });
 }
 
 function showMsg(response) {
-    console.log(response);
-    console.log(response["info"]);
     $("div#error").hide("slow");
     $("div#succes").hide("slow");
     if (response["info"] !== undefined) {
@@ -193,4 +235,11 @@ function menuContextuele() {
 
 
     });
+}
+function selectCategory(data) {
+    var view = "";
+    for (var i = 0; i < data.length; i++) {
+        view += "<option value='" + data[i]["id"] + "'>" + data[i]["text"] + "</option>";
+    }
+    return view;
 }

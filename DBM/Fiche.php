@@ -56,12 +56,12 @@ class Fiche
 
     public function getValues()
     {
-        return $this->getLibelle() . "," . $this->getCategoryId();
+        return "'" . $this->getLibelle() . "'," . $this->getCategoryId();
     }
 
     public function setValues()
     {
-        return "libelle=" . $this->getLibelle() . "," . "category_id=" . $this->getCategoryId();
+        return "libelle='" . $this->getLibelle() . "'," . "category_id=" . $this->getCategoryId();
     }
 
     public function getName()

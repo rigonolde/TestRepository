@@ -14,12 +14,12 @@
     <route urlPath="/api/category/list" controller="Controller\CategoryController" action="listAction">
     </route>
 
-    <!-- route for fish -->
+    <!-- route for fiche -->
     <route urlPath="/api/fiche/delete/{id}" controller="Controller\FicheController" action="deleteAction">
     </route>
     <route urlPath="/api/fiche/edit/{id}" controller="Controller\FicheController" action="editAction" >
     </route>
-    <route urlPath="/api/fiche/new" controller="Controller\FicheController" action="editAction" >
+    <route urlPath="/api/fiche/new" controller="Controller\FicheController" action="addAction" >
     </route>
     <route urlPath="/api/fiche/list" controller="Controller\FicheController" action="listAction">
     </route>
