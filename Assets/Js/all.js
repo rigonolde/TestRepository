@@ -6,6 +6,7 @@ $(document).ready(function () {
             $(this).attr("style", "border-color:red;");
         }
     });
+
     $("#selectEditCategory").change(function () {
         $(this).children("option").removeAttr("selected");
         $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
@@ -19,6 +20,7 @@ function listAllCagory(url) {
     }
     $.get(url, function (data) {
         $("#selectEditCategory").html(selectCategory(data));
+        $("#selectEditCategory").children("option").eq(0).attr("selected", "selected");
         datas = data.concat([{id: "0", parent: "#", text: "Root", description: "lkjklj"}]);
         $('#jstree_demo_div').jstree({'core': {
                 'data': datas
@@ -41,7 +43,7 @@ function listAllCagory(url) {
 
 }
 
-function listAllFiche(url) {
+function listAllFiche(url, msg = null) {
     $.get("../View/Fiche/list_fiche.php", function (data) {
         $("#tableContent").html(data);
     });
@@ -52,7 +54,7 @@ function listAllFiche(url) {
         cache: false,
         dataType: "json",
         success: function (response) {
-            showMsg(response);
+            showMsg(response, msg);
             viewTbodyFiche(response);
             manageFiche();
         },
@@ -153,13 +155,12 @@ function manageFiche() {
 
                                 $("#img-loading-edit").hide();
                                 if (action == "new") {
-                                    listAllFiche(host + "/api/fiche/list/");
+                                    listAllFiche(host + "/api/fiche/list/", response["info"]);
                                 } else {
                                     tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
                                     tr.children("td").eq(2).html($("#libelleEdit").val());
                                     tr.children("td").eq(3).children('button').attr("data-value", $("#selectEditCategory").children("option[selected='selected']").val());
                                 }
-                                showMsg(response);
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 $("#img-loading-edit").hide();
@@ -184,7 +185,7 @@ function manageFiche() {
     });
 }
 
-function showMsg(response) {
+function showMsg(response, msg = null) {
     $("div#error").hide("slow");
     $("div#succes").hide("slow");
     if (response["info"] !== undefined) {
@@ -195,6 +196,10 @@ function showMsg(response) {
         $("div#error").show("slow");
         $("div#error").children("strong").html(response["error"]);
     }
+    if (msg != null) {
+        $("div#succes").show("slow");
+        $("div#succes").children("strong").html(msg);
+}
 }
 
 function deleteCategory(url) {

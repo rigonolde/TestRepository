@@ -71,7 +71,7 @@ class Fiche
 
     public function getValuesToInsert()
     {
-        return "libelle, description, category_id";
+        return "libelle, category_id";
     }
 
 }
