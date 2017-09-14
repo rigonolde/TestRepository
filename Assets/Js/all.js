@@ -132,6 +132,7 @@ function manageFiche() {
         var urlPost = host + "/api/fiche/edit/" + $("#idEdit").val();
         if (action == "new") {
             urlPost = host + "/api/fiche/new";
+            $("#libelleEdit").val("");
         }
         $("#dialog-edit-fiche").dialog({
             resizable: false,
