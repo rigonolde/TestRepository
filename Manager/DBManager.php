@@ -102,14 +102,15 @@ class DBManager
         }
     }
 
-    public function delete($entity, $entityRelation)
+    public function delete($entity, $entityRelation = null)
     {
         $sql = sprintf("DELETE FROM %s  WHERE id=%d", $entity->getName(), $entity->getId());
-        $sql1 = sprintf("DELETE FROM %s  WHERE parent_id=%d", $entity->getName(), $entity->getId());
-        $sql2 = sprintf("DELETE FROM %s  WHERE category_id=%d", $entityRelation, $entity->getId());
-        $this->statement->query($sql1);
-        $this->statement->query($sql2);
-
+        if ($entityRelation != null) {
+            $sql1 = sprintf("DELETE FROM %s  WHERE parent_id=%d", $entity->getName(), $entity->getId());
+            $sql2 = sprintf("DELETE FROM %s  WHERE category_id=%d", $entityRelation, $entity->getId());
+            $this->statement->query($sql1);
+            $this->statement->query($sql2);
+        }
         if ($this->statement->query($sql) === TRUE) {
             $this->response = array(
                 "info" => "Detete record successfully"

@@ -160,6 +160,7 @@ function manageFiche() {
                                     tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
                                     tr.children("td").eq(2).html($("#libelleEdit").val());
                                     tr.children("td").eq(3).children('button').attr("data-value", $("#selectEditCategory").children("option[selected='selected']").val());
+                                    showMsg(response);
                                 }
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
