@@ -58,6 +58,8 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
             $params = array();
             if (isset($_GET["ids"])) {
                 $params[] = "c.id IN " . $_GET["ids"];
+            }elseif (isset($_GET["searParams"])) {
+                $params[] = "c.libelle LIKE '%".$_GET["searParams"]."%' OR f.libelle LIKE '%".$_GET["searParams"]."%' OR c.description LIKE '%".$_GET["searParams"]."%'";
             }
             $dbManager->queryFiche($params);
             $this->renderJson($dbManager->getResponse());

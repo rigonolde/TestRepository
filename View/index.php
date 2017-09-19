@@ -15,9 +15,9 @@
                     <a class="nav-link" href="#">Help</a>
                 </li>
             </ul>
-            <form class="form-inline mt-2 mt-md-0">
+            <form class="form-inline mt-2 mt-md-0" action="javascript:void()">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchButton">Search</button>
             </form>
         </div>
     </nav>
@@ -66,8 +66,10 @@
         </div>
     </div>
     <?php include 'footer.php'; ?>
-    <div id="dialog-confirm" title="Confirmation">
-        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Voulez-vous supprimer ?</p>
+    <div style="display: none;">
+        <div id="dialog-confirm" title="Confirmation">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>Voulez-vous supprimer ?</p>
+        </div>
     </div>
     <div style="display: none;">
         <div id="dialog-edit-fiche" title="Modification Fiche">

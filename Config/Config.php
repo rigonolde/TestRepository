@@ -2,11 +2,9 @@
 
 namespace Config;
 
-/**
- * Description of Config
- *
- * @author josio
- */
+/*
+* config du projet
+*/
 class Config
 {
     /*
@@ -33,5 +31,5 @@ class Config
      * Mot de passe de la base de données
      */
     public $BD_PASSWD = '';
-
+    
 }

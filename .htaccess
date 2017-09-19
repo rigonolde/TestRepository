@@ -1,5 +1,9 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile D:/projet/TestRepository/.htpasswd
+Require valid-user
 RewriteEngine On
 RewriteBase /
 RewriteRule ^index\.php$ - [L]

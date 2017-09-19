@@ -15,7 +15,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
             $category = new \DBM\Category();
             $category->setId((int) $id);
             $dbManager = new \Manager\DBManager();
-            $dbManager->delete($category, "fiche");
+            $dbManager->delete($category);
             $this->renderJson($dbManager->getResponse());
         } else {
             $this->renderJson(array("error" => "Error Method sending"));

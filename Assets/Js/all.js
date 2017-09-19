@@ -11,6 +11,11 @@ $(document).ready(function () {
         $(this).children("option").removeAttr("selected");
         $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
     }).change();
+    $("#searchButton").click(function(){
+        if($(this).prev("input").val() != ""){
+            serchFiche($(this).prev("input").val());
+        }
+    });
 });
 
 function listAllCagory(url) {
@@ -21,7 +26,8 @@ function listAllCagory(url) {
     $.get(url, function (data) {
         $("#selectEditCategory").html(selectCategory(data));
         $("#selectEditCategory").children("option").eq(0).attr("selected", "selected");
-        datas = data.concat([{id: "0", parent: "#", text: "Root", description: "lkjklj"}]);
+        datas = data.concat([{id: "0", parent: "#", text: "Root", description: "default"}]);
+        console.log(datas);
         $('#jstree_demo_div').jstree({'core': {
                 'data': datas
             }});
@@ -134,6 +140,7 @@ function manageFiche() {
             urlPost = host + "/api/fiche/new";
             $("#libelleEdit").val("");
         }
+        $("#libelleEdit").removeAttr("style");
         $("#dialog-edit-fiche").dialog({
             resizable: false,
             height: "auto",
@@ -171,10 +178,10 @@ function manageFiche() {
                                 $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
                             }
                         });
+                        $(this).dialog("close");
                     } else {
-                        $("#libelleEdit").attr("style", "border-color:red;")
+                        $("#libelleEdit").attr("style", "border-color:red;");
                     }
-                    $(this).dialog("close");
                 },
                 "Non": function () {
                     $(this).dialog("close");
@@ -232,6 +239,9 @@ function menuContextuele() {
                 if (key == "delete") {
                     deleteCategory(urlDelete)
                 }
+                if (key == "edit") {
+                    
+                }
                 console.log(options.$trigger.attr('id'));
             },
             items: {
@@ -249,4 +259,8 @@ function selectCategory(data) {
         view += "<option value='" + data[i]["id"] + "'>" + data[i]["text"] + "</option>";
     }
     return view;
+}
+function serchFiche(str){
+    console.log(host+"/api/fiche/list/?searParams="+str);
+    listAllFiche(host+"/api/fiche/list/?searParams="+str);
 }
