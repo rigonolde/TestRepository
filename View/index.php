@@ -84,5 +84,20 @@
             </div>
         </div>
     </div>
+    <div style="display: none;">
+        <div id="dialog-edit-category" title="Modification Fiche">
+            <input type="hidden" id='idEditCategory' />
+            <label>parentId</label>&nbsp;&nbsp;&nbsp;
+            <select id='selectEditCategoryC' class="width">
+            </select><br />
+            <label>Libellé</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" id='libelleEditCategory'class="width controlVide"/>
+            <label>Description</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <textarea type="text" id='descriptionCategory'class="width controlVide"></textarea>
+            <div id="img-loading-edit-category">
+                <img src="../Assets/Images/loading.gif" style="height: 30px;float: right;display: none;" />
+            </div>
+        </div>
+    </div>
 </body>
 </html>

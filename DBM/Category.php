@@ -36,7 +36,7 @@ class Category
 
     function getParentId()
     {
-        return $this->parentId;
+        return $this->parentId != null ? $this->parentId : 'NULL';
     }
 
     function getLibelle()

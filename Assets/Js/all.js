@@ -11,8 +11,12 @@ $(document).ready(function () {
         $(this).children("option").removeAttr("selected");
         $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
     }).change();
-    $("#searchButton").click(function(){
-        if($(this).prev("input").val() != ""){
+    $("#selectEditCategoryC").change(function () {
+        $(this).children("option").removeAttr("selected");
+        $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
+    }).change();
+    $("#searchButton").click(function () {
+        if ($(this).prev("input").val() != "") {
             serchFiche($(this).prev("input").val());
         }
     });
@@ -26,8 +30,10 @@ function listAllCagory(url) {
     $.get(url, function (data) {
         $("#selectEditCategory").html(selectCategory(data));
         $("#selectEditCategory").children("option").eq(0).attr("selected", "selected");
+        $("#selectEditCategoryC").html("<option value='0'>Pas de parent</option>" + selectCategory(data));
+        $("#selectEditCategoryC").children("option").eq(0).attr("selected", "selected");
         datas = data.concat([{id: "0", parent: "#", text: "Root", description: "default"}]);
-        console.log(datas);
+
         $('#jstree_demo_div').jstree({'core': {
                 'data': datas
             }});
@@ -189,9 +195,6 @@ function manageFiche() {
             }
         });
     });
-    $("#newFiche").click(function () {
-
-    });
 }
 
 function showMsg(response, msg = null) {
@@ -229,6 +232,78 @@ function deleteCategory(url) {
         }
     });
 }
+function editCategory(id, urlPost, action) {
+    if (action == "new") {
+        dialogNewAndEditCategory(urlPost);
+    }
+    if (action == "edit") {
+        $.get(host + "/api/category/list/?id=" + id, function (data) {
+            if (data["info"] !== undefined) {
+                var response = {"error": "Categorie n'existe pas !"};
+                showMsg(response);
+            } else {
+
+                $("#dEditCategory").val(id);
+                $("#libelleEditCategory").val(data[0]["text"]);
+                $("#selectEditCategoryC").children("option").removeAttr("selected");
+                $("#selectEditCategoryC").children("option[value='" + data[0]["parent"] + "']").attr("selected", "selected");
+                $("#descriptionCategory").val(data[0]["description"]);
+                dialogNewAndEditCategory(urlPost);
+            }
+        });
+    }
+
+
+}
+function dialogNewAndEditCategory(urlPost) {
+    $("#dialog-edit-category").dialog({
+        resizable: false,
+        height: "auto",
+        width: 400,
+        modal: true,
+        buttons: {
+            "Oui": function () {
+                if ($("#libelleEditCategory").val() != '' && $("#descriptionCategory").val() != "") {
+
+                    $("#img-loading-edit-category").show();
+                    $.ajax({
+                        url: urlPost,
+                        method: "POST",
+                        cache: false,
+                        data: {
+                            'id': $("#dEditCategory").val(),
+                            'libelle': $("#libelleEditCategory").val(),
+                            'parentId': parseInt($("#selectEditCategoryC").children("option[selected='selected']").val()),
+                            'description': $("#descriptionCategory").val(),
+                        },
+
+                        success: function (response) {
+                            console.log(response);
+
+                            $("#img-loading-edit-category").hide();
+                            listAllCagory(host + "/api/category/list/");
+                            showMsg(response);
+
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            console.log(ajaxOptions + xhr + thrownError);
+                            $("#img-loading-edit-category").hide();
+                            showMsg(xhr);
+                            $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+                        }
+                    });
+                    $(this).dialog("close");
+                } else {
+                    $("#libelleEditCategory").attr("style", "border-color:red;");
+                    $("#libelleEditCategory").attr("style", "border-color:red;");
+                }
+            },
+            "Non": function () {
+                $(this).dialog("close");
+            }
+        }
+    });
+}
 function menuContextuele() {
     //Menu contextule
     $(function () {
@@ -240,9 +315,9 @@ function menuContextuele() {
                     deleteCategory(urlDelete)
                 }
                 if (key == "edit") {
-                    
+                    var urlEdit = host + "/api/category/edit/" + options.$trigger.attr('id');
+                    editCategory(options.$trigger.attr('id'), urlEdit, "edit");
                 }
-                console.log(options.$trigger.attr('id'));
             },
             items: {
                 "edit": {name: "Modifier", icon: "edit"},
@@ -260,7 +335,6 @@ function selectCategory(data) {
     }
     return view;
 }
-function serchFiche(str){
-    console.log(host+"/api/fiche/list/?searParams="+str);
-    listAllFiche(host+"/api/fiche/list/?searParams="+str);
+function serchFiche(str) {
+    listAllFiche(host + "/api/fiche/list/?searParams=" + str);
 }

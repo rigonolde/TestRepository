@@ -27,7 +27,8 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
             $category->setId($id);
-            $category->setParentId($_POST["parentId"]);
+            $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
+            $category->setParentId($parentId);
             $category->setLibelle($_POST["libelle"]);
             $category->setDescription($_POST["description"]);
             $dbManager = new \Manager\DBManager();
@@ -59,7 +60,9 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $dbManager = new \Manager\DBManager();
             $param = array();
-//            $param[] = "parent_id is null";
+            if (isset($_GET["id"])) {
+                $param[] = "id=" . $_GET["id"];
+            }
             $dbManager->queryCategory($param);
             $this->renderJson($dbManager->getResponse());
         } else {
