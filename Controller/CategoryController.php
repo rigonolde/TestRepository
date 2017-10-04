@@ -43,7 +43,8 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
-            $category->setParentId($_POST["parentId"]);
+            $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
+            $category->setParentId($parentId);
             $category->setLibelle($_POST["libelle"]);
             $category->setDescription($_POST["description"]);
             $dbManager = new \Manager\DBManager();
