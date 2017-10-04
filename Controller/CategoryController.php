@@ -39,11 +39,10 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
         }
     }
 
-    public function addAction($id)
+    public function addAction()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
-            $category->setId($_POST["id"]);
             $category->setParentId($_POST["parentId"]);
             $category->setLibelle($_POST["libelle"]);
             $category->setDescription($_POST["description"]);

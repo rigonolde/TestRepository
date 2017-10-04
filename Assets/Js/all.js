@@ -20,9 +20,12 @@ $(document).ready(function () {
             serchFiche($(this).prev("input").val());
         }
     });
+    $("#editNouvCat").click(function () {
+        editCategory(1, host + "/api/category/new", "new");
+    });
 });
 
-function listAllCagory(url) {
+function listAllCagory(url, msg = null) {
     var tmp = $('#jstree_demo_div').jstree(true);
     if (tmp) {
         tmp.destroy();
@@ -50,7 +53,7 @@ function listAllCagory(url) {
         listAllFiche(url);
     });
 
-    listAllFiche(host + "/api/fiche/list/");
+    listAllFiche(host + "/api/fiche/list/", msg);
     menuContextuele();
 
 }
@@ -222,9 +225,7 @@ function deleteCategory(url) {
         cache: false,
         dataType: "json",
         success: function (response) {
-            console.log(response);
-            showMsg(response);
-            listAllCagory(host + "/api/category/list/");
+            listAllCagory(host + "/api/category/list/", response['info']);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             showMsg(xhr);
@@ -234,6 +235,11 @@ function deleteCategory(url) {
 }
 function editCategory(id, urlPost, action) {
     if (action == "new") {
+        $("#libelleEditCategory").val("");
+        $("#descriptionCategory").val("");
+        $("#selectEditCategoryC").children("option").removeAttr("selected");
+        $("#selectEditCategoryC").children("option[value='0']").attr("selected", "selected");
+        $("#descriptionCategory").val("");
         dialogNewAndEditCategory(urlPost);
     }
     if (action == "edit") {
@@ -278,17 +284,13 @@ function dialogNewAndEditCategory(urlPost) {
                         },
 
                         success: function (response) {
-                            console.log(response);
 
                             $("#img-loading-edit-category").hide();
-                            listAllCagory(host + "/api/category/list/");
-                            showMsg(response);
-
+                            listAllCagory(host + "/api/category/list/", response["info"]);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            console.log(ajaxOptions + xhr + thrownError);
                             $("#img-loading-edit-category").hide();
-                            showMsg(xhr);
+                            showMsg("no msg", ajaxOptions + xhr + thrownError);
                             $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
                         }
                     });

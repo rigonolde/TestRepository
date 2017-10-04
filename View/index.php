@@ -30,6 +30,7 @@
                         <a class="nav-link active" href="#" id="category">CATEGORIES</a>
                     </li>
                 </ul>
+                <button type="button" class="btn btn-primary" id="editNouvCat">Nouveau</button>
                 <div id="jstree_demo_div">
                 </div>
 

@@ -2,7 +2,7 @@
 <IfModule mod_rewrite.c>
 AuthType Basic
 AuthName "Password Protected Area"
-AuthUserFile D:/projet/TestRepository/.htpasswd
+AuthUserFile E:/Projet/TestProject/TestRepository/.htpasswd
 Require valid-user
 RewriteEngine On
 RewriteBase /
