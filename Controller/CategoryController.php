@@ -11,7 +11,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function deleteAction($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'GET') {
             $category = new \DBM\Category();
             $category->setId((int) $id);
             $dbManager = new \Manager\DBManager();
@@ -24,7 +24,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function editAction($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
             $category->setId($id);
             $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
@@ -41,7 +41,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function addAction()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
             $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
             $category->setParentId($parentId);
@@ -57,7 +57,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function listAction()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'GET') {
             $dbManager = new \Manager\DBManager();
             $param = array();
             if (isset($_GET["id"])) {

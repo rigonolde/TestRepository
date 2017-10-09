@@ -11,7 +11,7 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function deleteAction($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'GET') {
             $fiche = new \DBM\Fiche();
             $fiche->setId((int) $id);
             $dbManager = new \Manager\DBManager();
@@ -24,7 +24,7 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function editAction($id)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $fiche = new \DBM\Fiche();
             $fiche->setId($id);
             $fiche->setLibelle($_POST["libelle"]);
@@ -39,7 +39,7 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function addAction()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $fiche = new \DBM\Fiche();
             $fiche->setLibelle($_POST["libelle"]);
             $fiche->setCategoryId($_POST["categoryId"]);
@@ -53,13 +53,13 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
 
     public function listAction()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'GET') {
             $dbManager = new \Manager\DBManager();
             $params = array();
             if (isset($_GET["ids"])) {
                 $params[] = "c.id IN " . $_GET["ids"];
-            }elseif (isset($_GET["searParams"])) {
-                $params[] = "c.libelle LIKE '%".$_GET["searParams"]."%' OR f.libelle LIKE '%".$_GET["searParams"]."%' OR c.description LIKE '%".$_GET["searParams"]."%'";
+            } elseif (isset($_GET["searParams"])) {
+                $params[] = "c.libelle LIKE '%" . $_GET["searParams"] . "%' OR f.libelle LIKE '%" . $_GET["searParams"] . "%' OR c.description LIKE '%" . $_GET["searParams"] . "%'";
             }
             $dbManager->queryFiche($params);
             $this->renderJson($dbManager->getResponse());
