@@ -262,6 +262,8 @@ function editCategory(id, urlPost, action) {
 
 }
 function dialogNewAndEditCategory(urlPost) {
+    $("#libelleEditCategory").removeAttr("style");
+    $("#descriptionCategory").removeAttr("style");
     $("#dialog-edit-category").dialog({
         resizable: false,
         height: "auto",
@@ -296,8 +298,15 @@ function dialogNewAndEditCategory(urlPost) {
                     });
                     $(this).dialog("close");
                 } else {
-                    $("#libelleEditCategory").attr("style", "border-color:red;");
-                    $("#libelleEditCategory").attr("style", "border-color:red;");
+                    $("#libelleEditCategory").removeAttr("style");
+                    $("#descriptionCategory").removeAttr("style");
+                    if ($("#libelleEditCategory").val() == "") {
+                        $("#libelleEditCategory").attr("style", "border-color:red;");
+                    }
+                    if ($("#descriptionCategory").val() == "") {
+                        $("#descriptionCategory").attr("style", "border-color:red;");
+                    }
+
                 }
             },
             "Non": function () {
