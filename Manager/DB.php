@@ -11,27 +11,23 @@ use Config\Config;
  *
  * @author josio
  */
-class DB
+class DB extends Config
 {
-    private $config;
     private $statement;
 
     public function __construct()
     {
-        $this->config = new \Config\Config();
         $this->statement = null;
         $this->bdConnexion();
     }
 
     public function bdConnexion()
     {
-        $conn = new \mysqli($this->config->BD_HOST, $this->config->BD_USER, $this->config->BD_PASSWD, $this->config->BD_NAME, $this->config->BD_PORT);
-
+        $conn = new \mysqli(parent::BD_HOST, parent::BD_USER, parent::BD_PASSWD, parent::BD_NAME, parent::BD_PORT);
         if ($conn->connect_error) {
-            return false;
+            die('Erreur Connection de la base de données ou éteint');
         }
         $this->setStatement($conn);
-        return true;
     }
 
     function getConfig()
