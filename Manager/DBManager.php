@@ -106,9 +106,15 @@ class DBManager
     {
         $sql = sprintf("DELETE FROM %s  WHERE id=%d", $entity->getName(), $entity->getId());
         if ($this->statement->query($sql) === TRUE) {
-            $this->response = array(
-                "info" => "Detete record successfully"
-            );
+            if ($this->statement->affected_rows > 0) {
+                $this->response = array(
+                    "info" => "Detete record successfully"
+                );
+            } else {
+                $this->response = array(
+                    "error" => "Donnée n'existe pas !"
+                );
+            }
         } else {
             $this->response = array(
                 "error" => $this->statement->error

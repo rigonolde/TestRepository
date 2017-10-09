@@ -225,7 +225,10 @@ function deleteCategory(url) {
         cache: false,
         dataType: "json",
         success: function (response) {
-            listAllCagory(host + "/api/category/list/", response['info']);
+            if (response["error"] === undefined) {
+                listAllCagory(host + "/api/category/list/", response['info']);
+            }
+            showMsg(response);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             showMsg(xhr);
