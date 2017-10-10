@@ -33,7 +33,7 @@ function listAllCagory(url, msg = null) {
     $.get(url, function (data) {
         $("#selectEditCategory").html(selectCategory(data));
         $("#selectEditCategory").children("option").eq(0).attr("selected", "selected");
-        $("#selectEditCategoryC").html("<option value='0'>Pas de parent</option>" + selectCategory(data));
+        $("#selectEditCategoryC").html("<option value='0'>Choisissez un parent</option>" + selectCategory(data));
         $("#selectEditCategoryC").children("option").eq(0).attr("selected", "selected");
         datas = data.concat([{id: "0", parent: "#", text: "Root", description: "default"}]);
 
@@ -110,6 +110,7 @@ function manageFiche() {
             height: "auto",
             width: 400,
             modal: true,
+            title: "Confirmation suppression",
             buttons: {
                 "Oui": function () {
                     $.ajax({
@@ -137,7 +138,9 @@ function manageFiche() {
     $(".editFiche").click(function () {
         var action = $(this).attr("data-value");
         var tr = null;
+        var title = "Nouveau Fiche";
         if (action != 'new') {
+            title = "Modification Fiche";
             tr = $(this).parents("tr");
             $("#selectEditCategory").children("option").removeAttr("selected");
             $("#selectEditCategory").children("option[value='" + $(this).attr("data-value") + "']").attr("selected", "selected")
@@ -155,6 +158,7 @@ function manageFiche() {
             height: "auto",
             width: 400,
             modal: true,
+            title: title,
             buttons: {
                 "Oui": function () {
                     if ($("#libelleEdit").val() != '') {
@@ -237,15 +241,17 @@ function deleteCategory(url) {
     });
 }
 function editCategory(id, urlPost, action) {
+    var title = "Nouveau Categorie";
     if (action == "new") {
         $("#libelleEditCategory").val("");
         $("#descriptionCategory").val("");
         $("#selectEditCategoryC").children("option").removeAttr("selected");
         $("#selectEditCategoryC").children("option[value='0']").attr("selected", "selected");
         $("#descriptionCategory").val("");
-        dialogNewAndEditCategory(urlPost);
+        dialogNewAndEditCategory(urlPost, title);
     }
     if (action == "edit") {
+        title = "Modification Categorie";
         $.get(host + "/api/category/list/?id=" + id, function (data) {
             if (data["info"] !== undefined) {
                 var response = {"error": "Categorie n'existe pas !"};
@@ -257,14 +263,14 @@ function editCategory(id, urlPost, action) {
                 $("#selectEditCategoryC").children("option").removeAttr("selected");
                 $("#selectEditCategoryC").children("option[value='" + data[0]["parent"] + "']").attr("selected", "selected");
                 $("#descriptionCategory").val(data[0]["description"]);
-                dialogNewAndEditCategory(urlPost);
+                dialogNewAndEditCategory(urlPost, title);
             }
         });
     }
 
 
 }
-function dialogNewAndEditCategory(urlPost) {
+function dialogNewAndEditCategory(urlPost, title = "title") {
     $("#libelleEditCategory").removeAttr("style");
     $("#descriptionCategory").removeAttr("style");
     $("#dialog-edit-category").dialog({
@@ -272,6 +278,7 @@ function dialogNewAndEditCategory(urlPost) {
         height: "auto",
         width: 400,
         modal: true,
+        title: title,
         buttons: {
             "Oui": function () {
                 if ($("#libelleEditCategory").val() != '' && $("#descriptionCategory").val() != "") {

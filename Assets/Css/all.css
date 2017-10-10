@@ -7,22 +7,25 @@
 }
 
 .searchbtn{
-	padding-left: 900px;
-	margin-bottom: -10px;
+    padding-left: 900px;
+    margin-bottom: -10px;
 }
 
 .container_box{border: 1px solid #C8C8D3;box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);width:85%;margin:auto;background:none #fff;}
 
 .ctb{
-	margin-left: 200px;
-	margin-top: 30px;
+    margin-left: 200px;
+    margin-top: 30px;
 }
 .categ{
-	margin-top: -10px;
+    margin-top: -10px;
 }
 .nvcateg{
-	margin-top: -19px;
+    margin-top: -19px;
 }
 #category{
-	text-align: center;
+    text-align: center;
+}
+.navbar-brand-size{
+    font-size: 14px !important;
 }
