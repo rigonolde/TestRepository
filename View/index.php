@@ -107,7 +107,7 @@
             <div class="form-group-perso">
                 <div class="row">
                     <label class="control-label col-sm-4">Parent : </label>
-                    <select id='selectEditCategoryC' class="form-control form-control-perso">
+                    <select id='selectEditCategoryC' class="form-control form-control-perso" width>
                     </select>
                 </div>
             </div>

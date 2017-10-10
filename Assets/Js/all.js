@@ -35,8 +35,10 @@ function listAllCagory(url, msg = null) {
         $("#selectEditCategory").children("option").eq(0).attr("selected", "selected");
         $("#selectEditCategoryC").html("<option value='0'>Choisissez un parent</option>" + selectCategory(data));
         $("#selectEditCategoryC").children("option").eq(0).attr("selected", "selected");
-        datas = data.concat([{id: "0", parent: "#", text: "Root", description: "default"}]);
-
+        datas = [];
+        if (data.length > 0) {
+            datas = data.concat([{id: "0", parent: "#", text: "Root", description: "default"}]);
+        }
         $('#jstree_demo_div').jstree({'core': {
                 'data': datas
             }});
