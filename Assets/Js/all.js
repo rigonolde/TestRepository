@@ -16,8 +16,8 @@ $(document).ready(function () {
         $(this).children("option[value='" + $(this).val() + "']").attr("selected", "selected");
     }).change();
     $("#searchButton").click(function () {
-        if ($(this).prev("input").val() != "") {
-            serchFiche($(this).prev("input").val());
+        if ($(this).parent("span").prev("input").val() != "") {
+            serchFiche($(this).parent("span").prev("input").val());
         }
     });
     $("#editNouvCat").click(function () {
