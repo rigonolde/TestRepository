@@ -136,71 +136,76 @@ function manageFiche() {
         });
     });
     $(".editFiche").click(function () {
-        var action = $(this).attr("data-value");
-        var tr = null;
-        var title = "Nouveau Fiche";
-        if (action != 'new') {
-            title = "Modification Fiche";
-            tr = $(this).parents("tr");
-            $("#selectEditCategory").children("option").removeAttr("selected");
-            $("#selectEditCategory").children("option[value='" + $(this).attr("data-value") + "']").attr("selected", "selected")
-            $("#idEdit").val(tr.children("td").eq(0).html());
-            $("#libelleEdit").val(tr.children("td").eq(2).html());
-        }
-        var urlPost = host + "/api/fiche/edit/" + $("#idEdit").val();
-        if (action == "new") {
-            urlPost = host + "/api/fiche/new";
-            $("#libelleEdit").val("");
-        }
-        $("#libelleEdit").removeAttr("style");
-        $("#dialog-edit-fiche").dialog({
-            resizable: false,
-            height: "auto",
-            width: 400,
-            modal: true,
-            title: title,
-            buttons: {
-                "Oui": function () {
-                    if ($("#libelleEdit").val() != '') {
-                        $("#img-loading-edit").show();
-                        $.ajax({
-                            url: urlPost,
-                            method: "POST",
-                            cache: false,
-                            data: {
-                                'libelle': $("#libelleEdit").val(),
-                                'categoryId': $("#selectEditCategory").children("option[selected='selected']").val(),
-                            },
-                            dataType: "json",
-                            success: function (response) {
-
-                                $("#img-loading-edit").hide();
-                                if (action == "new") {
-                                    listAllFiche(host + "/api/fiche/list/", response["info"]);
-                                } else {
-                                    tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
-                                    tr.children("td").eq(2).html($("#libelleEdit").val());
-                                    tr.children("td").eq(3).children('button').attr("data-value", $("#selectEditCategory").children("option[selected='selected']").val());
-                                    showMsg(response);
-                                }
-                            },
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                $("#img-loading-edit").hide();
-                                showMsg(xhr);
-                                $("#img-loading-edit").hide();
-                                $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
-                            }
-                        });
-                        $(this).dialog("close");
-                    } else {
-                        $("#libelleEdit").attr("style", "border-color:red;");
-                    }
-                },
-                "Non": function () {
-                    $(this).dialog("close");
-                }
+        if ($("#selectEditCategory option").length == 0) {
+            var message = {"error": "Accun categorie disponible"};
+            showMsg(message);
+        } else {
+            var action = $(this).attr("data-value");
+            var tr = null;
+            var title = "Nouveau Fiche";
+            if (action != 'new') {
+                title = "Modification Fiche";
+                tr = $(this).parents("tr");
+                $("#selectEditCategory").children("option").removeAttr("selected");
+                $("#selectEditCategory").children("option[value='" + $(this).attr("data-value") + "']").attr("selected", "selected")
+                $("#idEdit").val(tr.children("td").eq(0).html());
+                $("#libelleEdit").val(tr.children("td").eq(2).html());
             }
-        });
+            var urlPost = host + "/api/fiche/edit/" + $("#idEdit").val();
+            if (action == "new") {
+                urlPost = host + "/api/fiche/new";
+                $("#libelleEdit").val("");
+            }
+            $("#libelleEdit").removeAttr("style");
+            $("#dialog-edit-fiche").dialog({
+                resizable: false,
+                height: "auto",
+                width: 400,
+                modal: true,
+                title: title,
+                buttons: {
+                    "Oui": function () {
+                        if ($("#libelleEdit").val() != '') {
+                            $("#img-loading-edit").show();
+                            $.ajax({
+                                url: urlPost,
+                                method: "POST",
+                                cache: false,
+                                data: {
+                                    'libelle': $("#libelleEdit").val(),
+                                    'categoryId': $("#selectEditCategory").children("option[selected='selected']").val(),
+                                },
+                                dataType: "json",
+                                success: function (response) {
+
+                                    $("#img-loading-edit").hide();
+                                    if (action == "new") {
+                                        listAllFiche(host + "/api/fiche/list/", response["info"]);
+                                    } else {
+                                        tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
+                                        tr.children("td").eq(2).html($("#libelleEdit").val());
+                                        tr.children("td").eq(3).children('button').attr("data-value", $("#selectEditCategory").children("option[selected='selected']").val());
+                                        showMsg(response);
+                                    }
+                                },
+                                error: function (xhr, ajaxOptions, thrownError) {
+                                    $("#img-loading-edit").hide();
+                                    showMsg(xhr);
+                                    $("#img-loading-edit").hide();
+                                    $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+                                }
+                            });
+                            $(this).dialog("close");
+                        } else {
+                            $("#libelleEdit").attr("style", "border-color:red;");
+                        }
+                    },
+                    "Non": function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        }
     });
 }
 
@@ -294,7 +299,6 @@ function dialogNewAndEditCategory(urlPost, title = "title") {
                             'parentId': parseInt($("#selectEditCategoryC").children("option[selected='selected']").val()),
                             'description': $("#descriptionCategory").val(),
                         },
-
                         success: function (response) {
 
                             $("#img-loading-edit-category").hide();
@@ -326,7 +330,7 @@ function dialogNewAndEditCategory(urlPost, title = "title") {
     });
 }
 function menuContextuele() {
-    //Menu contextule
+//Menu contextule
     $(function () {
         $.contextMenu({
             selector: '.jstree-node',
@@ -360,8 +364,6 @@ function menuContextuele() {
                 "delete": {name: "Supprimer", icon: "delete"},
             }
         });
-
-
     });
 }
 function selectCategory(data) {
