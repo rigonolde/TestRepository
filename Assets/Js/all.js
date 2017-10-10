@@ -333,7 +333,22 @@ function menuContextuele() {
             callback: function (key, options) {
                 var urlDelete = host + "/api/category/delete/" + options.$trigger.attr('id');
                 if (key == "delete") {
-                    deleteCategory(urlDelete)
+                    $("#dialog-confirm").dialog({
+                        resizable: false,
+                        height: "auto",
+                        width: 400,
+                        modal: true,
+                        title: "Confirmation suppression",
+                        buttons: {
+                            "Oui": function () {
+                                deleteCategory(urlDelete)
+                                $(this).dialog("close");
+                            },
+                            "Non": function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
                 }
                 if (key == "edit") {
                     var urlEdit = host + "/api/category/edit/" + options.$trigger.attr('id');
