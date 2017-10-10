@@ -29,3 +29,10 @@
 .navbar-brand-size{
     font-size: 14px !important;
 }
+.position{
+    position: relative;
+    float: right;
+    z-index: 200;
+    margin-left: 965px;
+    margin-top: -67px;
+}

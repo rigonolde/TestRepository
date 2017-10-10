@@ -8,10 +8,10 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <div class="searchbtn">
-                <form class="form-inline mt-2 mt-md-0" action="javascript:void()">
+                <form class="form-inline mt-2 mt-md-0" action="javascript:void()" style="margin-left: -26px;">
                     <input class="form-control mr-sm-2" type="text" placeholder="Rechercher Fiche" aria-label="Search">
                     <span class="input-group-btn">
-                        <button class="btn btn-outline-success" type="submit" id="searchButton">Search</button>
+                        <button class="btn btn-outline-success" type="submit" id="searchButton">Recherher</button>
                     </span>
                 </form>
             </div>
@@ -27,7 +27,7 @@
                     </li>
                 </ul>
                 <span class="input-group-btn nvcateg">
-                    <button class="btn btn-primary col-sm-12" type="button" id="editNouvCat">Nouveau +</button>
+                    <button class="btn btn-outline-success col-sm-12" type="button" id="editNouvCat">Nouveau +</button>
                 </span>
                 <div id="jstree_demo_div">
                 </div>
@@ -41,6 +41,9 @@
                             <div class="span2">
                                 <h1>Liste des fichiers</h1>
                             </div>
+                            <span class="position">
+                                <button type="button" class="btn btn-outline-success editFiche col-sm-12" data-value="new">Nouveau Fiche +</button>
+                            </span>
                         </div>
                         <section class="row text-center placeholders">
                             <!-- MESSAGE D'EURREUR -->
@@ -57,9 +60,7 @@
                                 <strong>Operation n'abouti pas </strong>
                             </div>
                             <!-- FIN MESSAGE D'EURREUR -->
-                            <span class="col-sm-2">
-                                <button type="button" class="btn btn-primary editFiche" data-value="new">Nouveau Fiche</button>
-                            </span>
+
                         </section>
                         <div id="tableContent" style="display: none;">
                             <!--                   table content-->
