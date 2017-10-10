@@ -66,7 +66,7 @@ class DBManager
             }
         } else {
             $this->response = array(
-                "info" => "Accune resultat trouvé"
+                "info" => "Accune fiche trouvé !"
             );
         }
     }
@@ -77,7 +77,7 @@ class DBManager
 
         if ($this->statement->query($sql) === TRUE) {
             $this->response = array(
-                "info" => "New record created successfully"
+                "info" => "Enregistrement " . $entity->getName() . " avec succée !"
             );
         } else {
             $response = array(
@@ -93,7 +93,7 @@ class DBManager
 
         if ($this->statement->query($sql) === TRUE) {
             $this->response = array(
-                "info" => "update record successfully"
+                "info" => "Modification " . $entity->getName() . " avec succé !"
             );
         } else {
             $this->response = array(
@@ -108,7 +108,7 @@ class DBManager
         if ($this->statement->query($sql) === TRUE) {
             if ($this->statement->affected_rows > 0) {
                 $this->response = array(
-                    "info" => "Detete record successfully"
+                    "info" => "Suppression " . $entity->getName() . " avec succée !"
                 );
             } else {
                 $this->response = array(
