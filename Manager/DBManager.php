@@ -80,8 +80,8 @@ class DBManager
                 "info" => "Enregistrement " . $entity->getName() . " avec succée !"
             );
         } else {
-            $response = array(
-                "error" => $this->statement->error
+            $this->response = array(
+                "error" => utf8_encode($this->statement->error)
             );
         }
     }
@@ -97,7 +97,7 @@ class DBManager
             );
         } else {
             $this->response = array(
-                "error" => $this->statement->error
+                "error" => utf8_encode($this->statement->error)
             );
         }
     }

@@ -125,8 +125,7 @@ function manageFiche() {
                             showMsg(response);
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
-                            showMsg(xhr);
-                            $("div#error").children("strong").html(ajaxOptions + xhr + thrownError);
+                            showMsg({}, ajaxOptions + xhr + thrownError);
                         }
                     });
                     $(this).dialog("close");
@@ -179,7 +178,11 @@ function manageFiche() {
 
                                     $("#img-loading-edit").hide();
                                     if (action == "new") {
-                                        listAllFiche(host + "/api/fiche/list/", response["info"]);
+                                        if (response["error"] !== undefined) {
+                                            showMsg(response);
+                                        } else {
+                                            listAllFiche(host + "/api/fiche/list/", response["info"]);
+                                        }
                                     } else {
                                         tr.children("td").eq(1).html($("#selectEditCategory").children("option[selected='selected']").html());
                                         tr.children("td").eq(2).html($("#libelleEdit").val());
@@ -213,15 +216,15 @@ function manageFiche() {
 
 function showMsg(response, msg = null) {
 
+    $("div#error").hide();
+    $("div#succes").hide();
     if (response["info"] !== undefined) {
         $("div#succes").children("strong").html(response["info"]);
         $("div#succes").show("slow");
-        $("div#error").hide();
     }
     if (response["error"] !== undefined) {
         $("div#error").children("strong").html(response["error"]);
         $("div#error").show("slow");
-        $("div#succes").hide();
     }
     if (msg != null) {
         $("div#succes").children("strong").html(msg);

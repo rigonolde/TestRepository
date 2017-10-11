@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <link rel="icon" href="../../../../favicon.ico">
         <title>Test Projet</title>
         <!-- CSS -->

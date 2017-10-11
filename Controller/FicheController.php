@@ -27,8 +27,8 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
         if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $fiche = new \DBM\Fiche();
             $fiche->setId($id);
-            $fiche->setLibelle($_POST["libelle"]);
-            $fiche->setCategoryId($_POST["categoryId"]);
+            $fiche->setLibelle(isset($_POST["libelle"]) ? $_POST["libelle"] : null);
+            $fiche->setCategoryId(isset($_POST["categoryId"]) ? $_POST["categoryId"] : null);
             $dbManager = new \Manager\DBManager();
             $dbManager->update($fiche);
             $this->renderJson($dbManager->getResponse());
@@ -41,8 +41,8 @@ Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $fiche = new \DBM\Fiche();
-            $fiche->setLibelle($_POST["libelle"]);
-            $fiche->setCategoryId($_POST["categoryId"]);
+            $fiche->setLibelle(isset($_POST["libelle"]) ? $_POST["libelle"] : null);
+            $fiche->setCategoryId(isset($_POST["categoryId"]) ? $_POST["categoryId"] : null);
             $dbManager = new \Manager\DBManager();
             $dbManager->insert($fiche);
             $this->renderJson($dbManager->getResponse());
