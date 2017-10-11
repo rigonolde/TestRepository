@@ -138,10 +138,7 @@ function manageFiche() {
         });
     });
     $(".editFiche").click(function () {
-        if ($("#selectEditCategory option").length == 0) {
-            var message = {"error": "Accun categorie disponible"};
-            showMsg(message);
-        } else {
+        if ($("#selectEditCategory option").length > 0) {
             var action = $(this).attr("data-value");
             var tr = null;
             var title = "Nouveau Fiche";
@@ -207,24 +204,29 @@ function manageFiche() {
                     }
                 }
             });
+        } else {
+            var message = {"error": "Accun categorie disponible"};
+            showMsg(message);
         }
     });
 }
 
 function showMsg(response, msg = null) {
-    $("div#error").hide("slow");
-    $("div#succes").hide("slow");
+
     if (response["info"] !== undefined) {
-        $("div#succes").show("slow");
         $("div#succes").children("strong").html(response["info"]);
+        $("div#succes").show("slow");
+        $("div#error").hide();
     }
     if (response["error"] !== undefined) {
-        $("div#error").show("slow");
         $("div#error").children("strong").html(response["error"]);
+        $("div#error").show("slow");
+        $("div#succes").hide();
     }
     if (msg != null) {
-        $("div#succes").show("slow");
         $("div#succes").children("strong").html(msg);
+        $("div#succes").show("slow");
+        $("div#error").hide();
 }
 }
 
