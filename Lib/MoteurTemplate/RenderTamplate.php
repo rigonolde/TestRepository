@@ -23,8 +23,10 @@ class RenderTamplate
             foreach ($params as $key => $value) {
                 ${$key} = $value;
             }
+            unset($params);
             include($pathView);
         } else {
+            unset($params);
             echo "Not found view" . $view;
         }
     }
