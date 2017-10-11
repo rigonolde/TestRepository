@@ -23,6 +23,7 @@ $(document).ready(function () {
     $("#editNouvCat").click(function () {
         editCategory(1, host + "/api/category/new", "new");
     });
+    $(document).tooltip();
 });
 
 function listAllCagory(url, msg = null) {
@@ -89,7 +90,8 @@ function viewTbodyFiche(data) {
     } else {
         for (var i = 0; i < data.length; i++) {
 
-            view += "<tr> <td>" + data[i]["id"] +
+            view += "<tr title='" + descriptionFiche(data[i]) + "'>" +
+                    "<td>" + data[i]["id"] +
                     "</td><td>" + data[i]["category"] +
                     "</td><td>" + data[i]["libelle"] +
                     '</td><td> <button type="button" class="btn btn-primary editFiche" data-value="' + data[i]["categoryId"] + '">Modifier</button></td> \n\
@@ -382,4 +384,9 @@ function selectCategory(data) {
 }
 function serchFiche(str) {
     listAllFiche(host + "/api/fiche/list/?searParams=" + str);
+}
+function descriptionFiche(data) {
+    console.log(data["description"]);
+    var str = 'category : ' + data['category'] + ', libellé : ' + data['libelle'] + '\n' + 'Description : ' + data['description'];
+    return str;
 }

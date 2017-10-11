@@ -53,21 +53,26 @@ class DBManager
         if (!empty($param)) {
             $where = " WHERE " . implode(" AND ", $param);
         }
-        $sql = "SELECT f.id as id,f.libelle as libelle,c.libelle as category,c.id as category_id FROM fiche as f LEFT JOIN category as c ON c.id = f.category_id" . $where;
+        $sql = "SELECT f.id as id,f.libelle as libelle,c.libelle as category,c.id as category_id, c.description as  description "
+            . "FROM fiche as f "
+            . "LEFT JOIN category as c ON c.id = f.category_id" . $where;
         $result = $this->statement->query($sql);
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $this->response[] = array(
-                    "id" => $row['id'],
-                    "libelle" => $row['libelle'],
-                    "categoryId" => $row['category_id'],
-                    "category" => $row['category']
+        if ($result) {
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $this->response[] = array(
+                        "id" => $row['id'],
+                        "libelle" => $row['libelle'],
+                        "categoryId" => $row['category_id'],
+                        "category" => $row['category'],
+                        "description" => $row['description']
+                    );
+                }
+            } else {
+                $this->response = array(
+                    "info" => "Accune fiche trouvé !"
                 );
             }
-        } else {
-            $this->response = array(
-                "info" => "Accune fiche trouvé !"
-            );
         }
     }
 
