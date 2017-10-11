@@ -27,10 +27,10 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
         if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
             $category->setId($id);
-            $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
+            $parentId = (isset($_POST["parentId"]) || $_POST["parentId"] == 0) ? null : $_POST["parentId"];
             $category->setParentId($parentId);
-            $category->setLibelle($_POST["libelle"]);
-            $category->setDescription($_POST["description"]);
+            $category->setLibelle(isset($_POST["libelle"]) ? $_POST["libelle"] : null);
+            $category->setDescription(isset($_POST["description"]) ? $_POST["description"] : null);
             $dbManager = new \Manager\DBManager();
             $dbManager->update($category);
             $this->renderJson($dbManager->getResponse());
@@ -43,10 +43,10 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
-            $parentId = $_POST["parentId"] == 0 ? null : $_POST["parentId"];
+            $parentId = (isset($_POST["parentId"]) || $_POST["parentId"] == 0) ? null : $_POST["parentId"];
             $category->setParentId($parentId);
-            $category->setLibelle($_POST["libelle"]);
-            $category->setDescription($_POST["description"]);
+            $category->setLibelle(isset($_POST["libelle"]) ? $_POST["libelle"] : null);
+            $category->setDescription(isset($_POST["description"]) ? $_POST["description"] : null);
             $dbManager = new \Manager\DBManager();
             $dbManager->insert($category);
             $this->renderJson($dbManager->getResponse());
