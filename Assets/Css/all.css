@@ -36,3 +36,10 @@
     margin-left: 965px;
     margin-top: -67px;
 }
+.ui-tooltip{
+    max-width: 500px !important;
+    overflow:auto !important;
+}
+.ui-tooltip-content{
+    background-color: #fdf8ef;
+}
