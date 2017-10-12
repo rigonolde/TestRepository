@@ -43,7 +43,7 @@ Class CategoryController extends \Lib\MoteurTemplate\RenderTamplate
     {
         if (parent::isAjax() && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $category = new \DBM\Category();
-            $parentId = (isset($_POST["parentId"]) || $_POST["parentId"] == 0) ? null : $_POST["parentId"];
+            $parentId = (!isset($_POST["parentId"]) || $_POST["parentId"] == 0) ? null : $_POST["parentId"];
             $category->setParentId($parentId);
             $category->setLibelle(isset($_POST["libelle"]) ? $_POST["libelle"] : null);
             $category->setDescription(isset($_POST["description"]) ? $_POST["description"] : null);
