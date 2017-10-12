@@ -43,3 +43,6 @@
 .ui-tooltip-content{
     background-color: #fdf8ef;
 }
+span{
+    display: inline-block;
+}
