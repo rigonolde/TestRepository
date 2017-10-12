@@ -65,6 +65,7 @@
                         <div id="tableContent" style="display: none;">
                             <!--                   table content-->
                         </div>
+
                         <div id="img-loading" class="img-loading">
                             <img src="../Assets/Images/loading.gif"  height = "200px">
                         </div>
@@ -102,7 +103,7 @@
         </div>
     </div>
     <div style="display: none;">
-        <div id="dialog-edit-category" title="Modification Fiche">
+        <div id="dialog-edit-category" title="Modification Caregorie">
             <input type="hidden" id='idEditCategory' />
             <div class="form-group-perso">
                 <div class="row">
