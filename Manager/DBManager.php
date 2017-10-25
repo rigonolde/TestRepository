@@ -2,9 +2,9 @@
 
 namespace Manager;
 
-require_once('DB.php');
-require_once('DBM/category.php');
-require_once('DBM/Fiche.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Manager/DB.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/DBM/category.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/DBM/Fiche.php');
 
 /**
  * Description of CategoryManager

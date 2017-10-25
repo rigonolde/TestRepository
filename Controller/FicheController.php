@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-require_once("Lib/MoteurTemplate/RenderTamplate.php");
-require_once('DBM/fiche.php');
-require_once('Manager/DBManager.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . "/Lib/MoteurTemplate/RenderTamplate.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . '/DBM/fiche.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Manager/DBManager.php');
 
 Class FicheController extends \Lib\MoteurTemplate\RenderTamplate
 {

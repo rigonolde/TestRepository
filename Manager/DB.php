@@ -2,7 +2,7 @@
 
 namespace Manager;
 
-require_once('Config/Config.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Config/Config.php');
 
 use Config\Config;
 

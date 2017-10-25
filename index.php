@@ -1,7 +1,7 @@
 <?php
 
-require_once('/Lib/Routing/ManagerRouting.php');
-require_once('/Manager/DB.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Lib/Routing/ManagerRouting.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Manager/DB.php');
 
 // TEST DE LA BASE DE DONNEES
 new \Manager\DB();

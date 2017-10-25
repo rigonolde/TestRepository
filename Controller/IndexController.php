@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-require_once("Lib/MoteurTemplate/RenderTamplate.php");
-require_once('DBM/category.php');
-require_once('Manager/DBManager.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . "/Lib/MoteurTemplate/RenderTamplate.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . '/DBM/category.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/Manager/DBManager.php');
 
 /**
  * Description of IndexController
